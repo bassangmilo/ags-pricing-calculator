@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B5D57">
+<title>AGS Pricing Calculator</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>AGS Pricing Calculator</h1>
+    <button type="button" id="clear" class="ghost">Clear</button>
+  </header>
+
+  <div class="modes" id="modes" role="radiogroup" aria-label="Calculation mode">
+    <button type="button" role="radio" data-mode="Profit">Profit</button>
+    <button type="button" role="radio" data-mode="Target Selling Price">Target selling price</button>
+    <button type="button" role="radio" data-mode="Target Purchase Price">Target purchase price</button>
+  </div>
+
+  <section class="inputs">
+    <div class="field">
+      <label for="fee">Fee scheme</label>
+      <select id="fee"></select>
+      <p class="hint mono" id="fee-formula"></p>
+    </div>
+
+    <div class="field" data-for="Profit,Target Selling Price">
+      <label for="purchase">Purchase price</label>
+      <div class="box"><span>Rp</span><input id="purchase" inputmode="decimal" autocomplete="off" placeholder="0"></div>
+      <p class="hint" id="hint-purchase"></p>
+    </div>
+
+    <div class="field" data-for="Profit,Target Purchase Price">
+      <label for="selling">Selling price</label>
+      <div class="box"><span>Rp</span><input id="selling" inputmode="decimal" autocomplete="off" placeholder="0"></div>
+      <p class="hint" id="hint-selling"></p>
+    </div>
+
+    <div class="field">
+      <label for="other">Other costs</label>
+      <div class="box"><span>Rp</span><input id="other" inputmode="decimal" autocomplete="off" value="0"></div>
+      <p class="hint" id="hint-other"></p>
+    </div>
+
+    <div class="pair" data-for="Target Selling Price,Target Purchase Price">
+      <div class="field">
+        <label for="roi">Target ROI</label>
+        <div class="box"><input id="roi" inputmode="decimal" autocomplete="off" placeholder="0"><span>%</span></div>
+        <p class="hint" id="hint-roi"></p>
+      </div>
+      <div class="field">
+        <label for="tprofit">Target profit</label>
+        <div class="box"><span>Rp</span><input id="tprofit" inputmode="decimal" autocomplete="off" placeholder="0"></div>
+        <p class="hint" id="hint-tprofit"></p>
+      </div>
+      <p class="either">Fill in one — Target ROI or Target Profit.</p>
+    </div>
+  </section>
+
+  <p class="banner" id="banner" role="alert" hidden></p>
+
+  <section class="result" aria-live="polite">
+    <p class="result-label" id="main-label"></p>
+    <p class="result-value" id="main-value">—</p>
+    <p class="result-exact" id="main-exact"></p>
+    <p class="result-note" id="main-note"></p>
+    <dl>
+      <div><dt>Platform fee</dt><dd id="r-fee">—</dd></div>
+      <div><dt>Net revenue</dt><dd id="r-net">—</dd></div>
+      <div><dt>Total cost</dt><dd id="r-cost">—</dd></div>
+      <div id="row-profit"><dt>Profit</dt><dd id="r-profit">—</dd></div>
+      <div><dt>Profit margin <small>of net revenue</small></dt><dd id="r-margin">—</dd></div>
+      <div><dt>ROI <small>of purchase price</small></dt><dd id="r-roi">—</dd></div>
+    </dl>
+  </section>
+</main>
+<script type="module" src="src/ui/ui.js"></script>
+</body>
+</html>
